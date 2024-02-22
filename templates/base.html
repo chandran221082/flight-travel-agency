@@ -22,6 +22,11 @@
             </ul>
         </div>
     </nav>
+    <dev>
+        <center>
+            <h3>Book your flights </h3>
+        </center>
+    </dev>
     <div class="container">
         <form>
             <div class="form-row">
@@ -53,7 +58,8 @@
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Search Flights</button>
+<!--            <button type="submit" class="btn btn-primary">Search Flights</button>-->
+            <button type="submit" class="btn btn-primary" formaction="http://127.0.0.1:5000/search">Search Flights</button>
         </form>
         {% block content %} {% endblock %}
     </div>

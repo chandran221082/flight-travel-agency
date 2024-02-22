@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>List of flights!!!</h1>
+    <table style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th>Origin City</th>
+        <th>Destination City</th>
+        <th>Airline</th>
+        <th>Depart Date</th>
+        <th>Available Seats</th>
+         <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for flight in flights %}
+        <tr style="border: 1px solid #ddd;">
+          <td style="padding: 8px; text-align: left;">{{ flight.origin_city }}</td>
+          <td style="padding: 8px; text-align: left;">{{ flight.destination_city }}</td>
+          <td style="padding: 8px; text-align: left;">{{ flight.airline }}</td>
+          <td style="padding: 8px; text-align: left;">{{ flight.depart_date }}</td>
+          <td style="padding: 8px; text-align: left;">{{ flight.available_seates }}</td>
+          <td>
+            <button type="button" style="
+                background-color: #4CAF50; /* Green color */
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            " onclick="handleAction('{{ flight.action }}')">
+              {{ flight.action }}
+            </button>
+          </td>
+                </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
