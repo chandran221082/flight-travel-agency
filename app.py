@@ -20,5 +20,11 @@ def search():
     conn = get_db_connection()
     flights = conn.execute(f"SELECT * FROM flights where origin_city='{origin_city}' and destination_city='{destination_city}'").fetchall()
     conn.close()
+    print(flights)
     return render_template('search.html', flights=flights)
 
+@app.route('/booking', methods=['POST'])
+def booking():
+    flight_details = request.form.to_dict()
+    print(flight_details)
+    return render_template('booking.html', flight_details=flight_details)

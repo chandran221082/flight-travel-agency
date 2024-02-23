@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>The ticket has been booked!!!</h1>
+    <h2>Origin City: {{ flight_details.origin_city }}</h2>
+    <h2>Destination City: {{ flight_details.destination_city }}</h2>
+    <h2>Airline: {{ flight_details.airline }}</h2>
+    <h2>Departure Date: {{ flight_details.depart_date }}</h2>
+{% endblock %}

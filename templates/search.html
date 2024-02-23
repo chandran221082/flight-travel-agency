@@ -3,6 +3,9 @@
 
 {% block content %}
     <h1>List of flights!!!</h1>
+<form>
+
+</form>
     <table style="border-collapse: collapse; width: 100%;">
     <thead>
       <tr style="background-color: #f2f2f2;">
@@ -16,6 +19,7 @@
     </thead>
     <tbody>
       {% for flight in flights %}
+      <form id="flightForm-{{ flight }}" class="booking" action="/booking", method="POST">
         <tr style="border: 1px solid #ddd;">
           <td style="padding: 8px; text-align: left;">{{ flight.origin_city }}</td>
           <td style="padding: 8px; text-align: left;">{{ flight.destination_city }}</td>
@@ -23,18 +27,15 @@
           <td style="padding: 8px; text-align: left;">{{ flight.depart_date }}</td>
           <td style="padding: 8px; text-align: left;">{{ flight.available_seates }}</td>
           <td>
-            <button type="button" style="
-                background-color: #4CAF50; /* Green color */
-                color: white;
-                padding: 8px 16px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            " onclick="handleAction('{{ flight.action }}')">
-              {{ flight.action }}
-            </button>
+            <input type="hidden" name="origin_city" value="{{flight.origin_city}}"/>
+            <input type="hidden" name="destination_city" value="{{flight.destination_city}}"/>
+            <input type="hidden" name="airline" value="{{flight.airline}}"/>
+            <input type="hidden" name="depart_date" value="{{flight.depart_date}}"/>
+            <input type="hidden" name="available_seates" value="{{flight.available_seates}}"/>
+            <button type="submit">Book</button>
           </td>
-                </tr>
+        </tr>
+      </form>
       {% endfor %}
     </tbody>
   </table>
