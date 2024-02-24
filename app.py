@@ -8,6 +8,13 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def execute_query(sql):
+    conn = get_db_connection()
+    res = conn.execute(sql).fetchall()
+    conn.commit()
+    conn.close()
+    return res
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -17,14 +24,16 @@ def search():
     origin_city = request.args.get('originCity')
     destination_city = request.args.get('destinationCity')
     airline = request.args.get('airline')
-    conn = get_db_connection()
-    flights = conn.execute(f"SELECT * FROM flights where origin_city='{origin_city}' and destination_city='{destination_city}'").fetchall()
-    conn.close()
-    print(flights)
+    depart_date = request.args.get('departDate')
+    sql = f"SELECT * FROM flights WHERE origin_city='{origin_city}' AND destination_city='{destination_city}' AND depart_date>=DATE('now')"
+    flights = execute_query(sql)
     return render_template('search.html', flights=flights)
 
 @app.route('/booking', methods=['POST'])
 def booking():
     flight_details = request.form.to_dict()
+    sql = f"UPDATE flights SET available_seates=available_seates-1 WHERE origin_city='{flight_details['origin_city']}' AND destination_city='{flight_details['destination_city']}' AND airline='{flight_details['airline']}'"
+    print(sql)
+    execute_query(sql)
     print(flight_details)
     return render_template('booking.html', flight_details=flight_details)

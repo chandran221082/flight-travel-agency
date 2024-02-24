@@ -5,5 +5,6 @@ CREATE TABLE flights (
     destination_city TEXT NOT NULL,
     airline TEXT NOT NULL,
     depart_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    available_seates INTEGER
+    available_seates INTEGER NOT NULL,
+    price DOUBLE NOT NULL
 );
